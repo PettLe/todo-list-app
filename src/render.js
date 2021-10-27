@@ -1,11 +1,6 @@
-import {/*localProjects*/ projektit, indexItem, pageIndex} from "./todos";
+//import {/*localProjects*/ projektit, indexItem, pageIndex} from "./todos";
 
 //let pageIndex = JSON.parse(localStorage.getItem("pageIndex"));
-
-/*function createProject(title) {
-    return {title}
-}*/
-
 
 function todoForm() {
     let content = document.getElementById("content");
@@ -84,7 +79,7 @@ function header() {
 
 //NAV BAR
 export let currentPage = 0;
-function nav(projects) {
+function nav(array) {
 
 
     const nav = document.createElement("div");
@@ -116,38 +111,19 @@ function nav(projects) {
         const link = document.createElement("li");
         link.dataset.index = g;
         link.classList.add("li");
-        //link.innerHTML = linkList[g]; VÄLIAIKAINEN POIS
         link.innerHTML = linkkiLista[g];
         link.addEventListener("click", function() {
             currentPage = g;
-            renderLink(projects);
+            let filteredArray = [];
+            for (let i = 0; i < array.length; i++) {
+                if (array[i].num == currentPage) {
+                    filteredArray.push(array[i])}}
+            renderLink(filteredArray);
         })
         links.appendChild(link);
     }
 
     navTitle.appendChild(links);
-    //linkList.push("Default", "Testi1", "Kokeilu5");
-    /*const link1 = document.createElement("li");
-    link1.dataset.index = 0;
-    link1.classList.add("li");
-    link1.innerHTML = "Default";
-
-    links.appendChild(link1);
-
-    const link2 = document.createElement("li");
-    link2.dataset.index = 1;
-    link2.classList.add("li");
-    link2.innerHTML = "Kokeilu";
-    links.appendChild(link2);
-
-
-    const link3 = document.createElement("li");
-    link3.dataset.index = 2;
-    link3.classList.add("li");
-    link3.innerHTML = "Kokeilu2";
-    links.appendChild(link3);*/
-
-    //linkList.push(link1, link2, link3);
 
     //CREATE NEW PROJECT
     const createNew = document.createElement("p");
@@ -163,16 +139,11 @@ function nav(projects) {
         navTitle.appendChild(links);
         links.appendChild(link);
 
-        //Työnnä LINKLIST arrayhyn textContent?
         linkkiLista.push(userInput);  //linkkiLista = linkList
-        //projektit.push(userInput = new Array());
-        //console.log(linkList);
-        //const linkList = document.getElementsByClassName("li");
         //localStorage.setItem("linkList1000", JSON.stringify(linkList)); VÄLIAIKAINEN POIS
         localStorage.setItem("localLinkit", JSON.stringify(linkkiLista));
-        //console.log(linkList)
+
 })
-console.log(linkkiLista);
     navTitle.appendChild(links);
 
     const navFooter = document.createElement("div");
@@ -184,16 +155,16 @@ console.log(linkkiLista);
 }
 
 export function renderTodo(array) {
-    console.log(array);
     const todoDiv = document.createElement("div");
     todoDiv.id = "todoDiv";
-    //console.log(indexItem());
+
     let filteredArray = [];
     for (let i = 0; i < array.length; i++) {
         if (array[i].num == currentPage) {
             filteredArray.push(array[i])}}
 
         console.log(filteredArray);
+        console.log(currentPage)
     for (let i = 0; i < filteredArray.length; i++) {
 
             const cardElement1 = document.createElement("div");
@@ -216,11 +187,11 @@ export function renderTodo(array) {
             cardExpand.classList.add("expandBtn");
             cardExpand.textContent = "Open";
 
-            for (let item in array[i]) {
-                cardTitle.textContent = (array[i].title);
-                cardDescription.textContent = (array[i].description);
-                cardDueDate.textContent = (array[i].dueDate);
-                cardPriority.innerHTML = "Priority: " + "<br>" + (array[i].priority);
+            for (let item in filteredArray[i]) {
+                cardTitle.textContent = (filteredArray[i].title);
+                cardDescription.textContent = (filteredArray[i].description);
+                cardDueDate.textContent = (filteredArray[i].dueDate);
+                cardPriority.innerHTML = "Priority: " + "<br>" + (filteredArray[i].priority);
             }
 
             const todo = document.createElement('div');
@@ -234,7 +205,7 @@ export function renderTodo(array) {
             trashBtn.textContent = "delete";
                 trashBtn.addEventListener("click", function() {
                     array.splice(todo.dataset.index, 1);
-                    localStorage.setItem("localProjektit", JSON.stringify(projektit));
+                    localStorage.setItem("localProjektit", JSON.stringify(array));
                         trashButton(array);
             });
             
@@ -298,15 +269,11 @@ export function renderTodo(array) {
          renderTodo(array);
     }
 
-    function newProject() {
 
-    }
-
-
-export default function renderAll(projects) {
-    nav(projects);
+export default function renderAll(array) {
+    nav(array);
     header();
     frontText();
     todoForm();
-    renderTodo(projects);
+    renderTodo(array);
 }

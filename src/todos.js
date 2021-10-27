@@ -1,17 +1,19 @@
+import { currentPage } from "./render";
+//import {projektit} from "./index.js";
 
 export let pageIndex = 0;
 export function indexItem() {
     const projectList = document.getElementsByClassName("li");
     for (let j = 0; j < projectList.length; j++) {
         projectList[j].addEventListener("click", function() {
-            pageIndex = parseInt(this.dataset.index);
+            pageIndex = j;
             localStorage.setItem("pageIndex", JSON.stringify(pageIndex));
             console.log(pageIndex);
         })
     }
 }
 
-export let projektit = [{title: "eat",
+let projektit = [/*{title: "eat",
 description: "so you dont die",
 dueDate: "now",
 priority: "high",
@@ -27,39 +29,13 @@ index: 0,},
 description: "toinen valmiiksi",
 dueDate: "itselaitettu",
 priority: "merkintä",
-index: 1}];
-//let kokeilu = [
-/*{title: "eat",
-description: "so you dont die",
-dueDate: "now",
-priority: "high"},
-
-{title: "apina",
-description: "gorilla",
-dueDate: "marakatti",
-priority: "Low"},
-
-{title: "tämä on",
-description: "toinen valmiiksi",
-dueDate: "itselaitettu",
-priority: "merkintä"}*/
-//]
+index: 1}*/];
 
 //export let localProjects = JSON.parse(localStorage.getItem("projects")); VÄLIAIKAINEN POIS
 
 /*let todos = localProjects[0];
 let komp = localProjects[1]; VÄLIAIKAINEN POIS*/
-/*[
-    {title: "puppe",
-    description: "eeeeeee",
-    dueDate: "now",
-    priority: "high"},
-    
-    {title: "pönkkö",
-    description: "hagahaga",
-    dueDate: "marakatti",
-    priority: "puppe"},
-];*/
+
 
 
 //export let projects = [
@@ -68,12 +44,12 @@ let komp = localProjects[1]; VÄLIAIKAINEN POIS*/
 
 export function createTodo() {
 class Todo {
-    constructor(title, description, dueDate, priority) {
+    constructor(title, description, dueDate, priority, num) {
     this.title = title
     this.description = description
     this.dueDate = dueDate
     this.priority = priority
-    this.num = pageIndex;
+    this.num = num;
     }
 }
 
@@ -84,25 +60,25 @@ class Todo {
 
     //SUBMIT
     function addTodo(event) {
-    indexItem();
+    //indexItem();
     let title = document.getElementById("title").value;
     let description = document.getElementById("description").value;
     let dueDate = document.getElementById("dueDate").value;
     let priority = document.getElementById("priority").value;
+    let num = currentPage;
 
-    let newTodo = new Todo(title, description, dueDate, priority);
+    let newTodo = new Todo(title, description, dueDate, priority, num);
     //projects[pageIndex].push(newTodo); VÄLIAIKAINEN POIS
-    projektit[pageIndex].push(newTodo);
+    projektit.push(newTodo);
     
 
     //localStorage.setItem("projects", JSON.stringify(projects)); VÄLIAIKAINEN POIS
     localStorage.setItem("localProjektit", JSON.stringify(projektit));
     form.reset();
     event.preventDefault();
-    //console.log(JSON.parse(localStorage.getItem("localProjektit")));
+
     
 }
-//console.log(pageIndex);
 };
 
 //export default createTodo;
