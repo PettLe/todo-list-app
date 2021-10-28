@@ -114,6 +114,7 @@ function nav(array) {
         link.innerHTML = linkkiLista[g];
         link.addEventListener("click", function() {
             currentPage = g;
+            localStorage.setItem("pageIndex", JSON.stringify(currentPage));
             let filteredArray = [];
             for (let i = 0; i < array.length; i++) {
                 if (array[i].num == currentPage) {
@@ -160,11 +161,11 @@ export function renderTodo(array) {
 
     let filteredArray = [];
     for (let i = 0; i < array.length; i++) {
-        if (array[i].num == currentPage) {
+        if (array[i].num == JSON.parse(localStorage.getItem("pageIndex"))) { //aikasemmin oli CurrentPage tms
             filteredArray.push(array[i])}}
 
         console.log(filteredArray);
-        console.log(currentPage)
+        console.log(JSON.parse(localStorage.getItem("pageIndex")))
     for (let i = 0; i < filteredArray.length; i++) {
 
             const cardElement1 = document.createElement("div");

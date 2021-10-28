@@ -64,8 +64,8 @@ class Todo {
     let title = document.getElementById("title").value;
     let description = document.getElementById("description").value;
     let dueDate = document.getElementById("dueDate").value;
-    let priority = document.getElementById("priority").value;
-    let num = currentPage;
+    let priority = document.getElementById("priority").value; //Oli currentPage
+    let num = JSON.parse(localStorage.getItem("pageIndex"));
 
     let newTodo = new Todo(title, description, dueDate, priority, num);
     //projects[pageIndex].push(newTodo); VÄLIAIKAINEN POIS

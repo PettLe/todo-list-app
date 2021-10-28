@@ -38,12 +38,12 @@ if (localStorage.getItem("localProjektit") === null) {
 //let projektit1 = projektit;
 
 
-
-/*if (localStorage.getItem("pageIndex") === null || localStorage.getItem("pageIndex") > linkCount) {
+const linkCount = document.getElementsByClassName("li");
+if (localStorage.getItem("pageIndex") === null || localStorage.getItem("pageIndex") > linkCount) {
     pageIndex = 0;
 } else {
 pageIndex = JSON.parse(localStorage.getItem("pageIndex"));
-}*/
+}
 //console.log(linkkiLista);
 //indexItem();
 console.log(pageIndex);
