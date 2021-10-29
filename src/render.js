@@ -116,17 +116,43 @@ function nav(array) {
                     filteredArray.push(array[i])}}
             renderLink(filteredArray);
         })
-
+            linkDiv.dataset.index = g;
             const trashBtn = document.createElement("p");
             trashBtn.id = "trashBtn";
             trashBtn.textContent = "close";
-              /*  trashBtn.addEventListener("click", function() {
-                    fullArray.splice(todo.dataset.index, 1);
-                    console.log(fullArray);
-                    localStorage.setItem("localProjektit", JSON.stringify(fullArray)); // Syöttää filteredArrayn localStorageen ja siksi kaikki muut projektit häviää
-                        trashButton(fullArray)
-                        console.log(JSON.parse(localStorage.getItem("localProjektit")));
-            });*/
+                trashBtn.addEventListener("click", function() {
+                    let r = confirm("Are you sure?");
+                    if (r == true) {
+                      linkkiLista.splice(linkDiv.dataset.index, 1);
+                      localStorage.setItem("localLinkit", JSON.stringify(linkkiLista));
+
+                      for (let i = 0; i < array.length; i++)
+                      if (array[i].num == linkDiv.dataset.index) {
+                         array.splice(i,1);
+                         i--;
+                      }
+                      for (let i = 0; i < array.length; i++) {
+                      if (array[i].num > linkDiv.dataset.index) {
+                        array[i].num -= 1;}
+                    }
+                      //return array.filter(function(el) { return el.num != linkDiv.dataset.index; });
+                      //let filtered = array.filter(function(el) { return el.index != linkDiv.dataset.index; });
+                      localStorage.setItem("localProjektit", JSON.stringify(array));
+                      console.log(linkDiv.dataset.index);
+                      console.log(array);
+                      location.reload();
+
+                      /*if (array[i].num > linkDiv.dataset.index) {
+                          array[i].num -= 1;
+                      }*/
+
+                      /* IF todo.num > poistettu.index
+                      todo.num = -1 */
+                    } else {
+                      return;
+                    }
+                    //VIELÄ! Hoida todojen poisto samalla, ja että renderöi esim defaultin
+            });
 
         linkDiv.appendChild(link);
         linkDiv.appendChild(trashBtn);
@@ -273,7 +299,12 @@ export function renderTodo(array) {
         allText.id = "allText";
         const h2Text = document.createElement("h2");
         const linkit = JSON.parse(localStorage.getItem("localLinkit"));
+        //console.log(linkit);
+        if (linkit == null) {
+            h2Text.textContent = "Default";
+        } else {
         h2Text.textContent = linkit[pageIndex];
+        }
         const frontTextDiv = document.createElement("div");
         frontTextDiv.id = "frontText";
         const frontText = document.createElement("p");
