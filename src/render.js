@@ -135,23 +135,14 @@ function nav(array) {
                       if (array[i].num > linkDiv.dataset.index) {
                         array[i].num -= 1;}
                     }
-                      //return array.filter(function(el) { return el.num != linkDiv.dataset.index; });
-                      //let filtered = array.filter(function(el) { return el.index != linkDiv.dataset.index; });
+
                       localStorage.setItem("localProjektit", JSON.stringify(array));
                       console.log(linkDiv.dataset.index);
                       console.log(array);
                       location.reload();
-
-                      /*if (array[i].num > linkDiv.dataset.index) {
-                          array[i].num -= 1;
-                      }*/
-
-                      /* IF todo.num > poistettu.index
-                      todo.num = -1 */
                     } else {
-                      return;
+                        return;
                     }
-                    //VIELÄ! Hoida todojen poisto samalla, ja että renderöi esim defaultin
             });
 
         linkDiv.appendChild(link);
@@ -245,10 +236,16 @@ export function renderTodo(array) {
             trashBtn.id = "trashBtn";
             trashBtn.textContent = "delete";
                 trashBtn.addEventListener("click", function() {
+                    //console.log(this.parentElement.parentElement.childNodes[0].textContent);
                     //console.log(JSON.parse(localStorage.getItem("localProjektit")));
-                    fullArray.splice(todo.dataset.index, 1);
-                    console.log(fullArray);
-                    localStorage.setItem("localProjektit", JSON.stringify(fullArray)); // Syöttää filteredArrayn localStorageen ja siksi kaikki muut projektit häviää
+                    for (let c = 0; c < fullArray.length; c++) {
+                    if (this.parentElement.parentElement.childNodes[0].textContent == fullArray[c].title) {
+                        fullArray.splice(c, 1);
+                    }
+                    }
+                    //fullArray.splice(todo.dataset.index, 1);
+                    //console.log(fullArray);
+                    localStorage.setItem("localProjektit", JSON.stringify(fullArray));
                         trashButton(fullArray)
                         console.log(JSON.parse(localStorage.getItem("localProjektit")));
             });
