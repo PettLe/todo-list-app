@@ -1,4 +1,4 @@
-import { currentPage } from "./render";
+import { currentPage, renderTodo, renderLink } from "./render";
 //import {projektit} from "./index.js";
 
 export let pageIndex = 0;
@@ -13,7 +13,14 @@ export function indexItem() {
     }
 }
 
-let projektit = [/*{title: "eat",
+/*if (localStorage.getItem("localProjektit") === null) {
+    let projektit = [];
+} else {
+    let projektit = JSON.parse(localStorage.getItem("localProjektit"));
+}*/
+
+//let projektit = JSON.parse(localStorage.getItem("localProjektit"));
+/*[{title: "eat",
 description: "so you dont die",
 dueDate: "now",
 priority: "high",
@@ -29,7 +36,7 @@ index: 0,},
 description: "toinen valmiiksi",
 dueDate: "itselaitettu",
 priority: "merkintä",
-index: 1}*/];
+index: 1}*///];
 
 //export let localProjects = JSON.parse(localStorage.getItem("projects")); VÄLIAIKAINEN POIS
 
@@ -42,7 +49,7 @@ let komp = localProjects[1]; VÄLIAIKAINEN POIS*/
     /*todos, komp, kokeilu VÄLIAIKAINEN POIS*/
 //];
 
-export function createTodo() {
+export function createTodo(array) {
 class Todo {
     constructor(title, description, dueDate, priority, num) {
     this.title = title
@@ -54,7 +61,10 @@ class Todo {
 }
 
     let form = document.querySelector('form');
+    let submitBtn = document.getElementById("submitBtn");
     form.addEventListener('submit', function(event) {
+        console.log("Korppi1");
+        //location.reload();
         addTodo(event);
     });
 
@@ -65,18 +75,18 @@ class Todo {
     let description = document.getElementById("description").value;
     let dueDate = document.getElementById("dueDate").value;
     let priority = document.getElementById("priority").value; //Oli currentPage
-    let num = JSON.parse(localStorage.getItem("pageIndex"));
+    let num = pageIndex;
 
     let newTodo = new Todo(title, description, dueDate, priority, num);
     //projects[pageIndex].push(newTodo); VÄLIAIKAINEN POIS
-    projektit.push(newTodo);
+    array.push(newTodo);
     
-
     //localStorage.setItem("projects", JSON.stringify(projects)); VÄLIAIKAINEN POIS
-    localStorage.setItem("localProjektit", JSON.stringify(projektit));
+    localStorage.setItem("localProjektit", JSON.stringify(array));
+    //location.reload();
     form.reset();
     event.preventDefault();
-
+    renderLink(array);
     
 }
 };

@@ -1,7 +1,7 @@
 import {createTodo, localProjects} from "./todos.js";
-import {projektit} from "./todos.js";
+//import {projektit} from "./todos.js";
 import "./style.css";
-import renderAll, { linkkiLista, currentPage } from "./render.js"
+import renderAll, { linkkiLista, currentPage, renderTodo, renderLink } from "./render.js"
 import { pageIndex, indexItem } from "./todos.js";
 
 
@@ -30,31 +30,33 @@ projects = JSON.parse(localStorage.getItem("localProjects"));
 }
 VÄLIAIKAINEN POIS*/
 // Ei toimi ellei commenttaa pois noita. Mut ei toimi niiden kanssakaan
+let projektit;
 if (localStorage.getItem("localProjektit") === null) {
     projektit = [];
 } else {
     projektit = JSON.parse(localStorage.getItem("localProjektit"));
 }
-//let projektit1 = projektit;
+
 
 
 const linkCount = document.getElementsByClassName("li");
 if (localStorage.getItem("pageIndex") === null || localStorage.getItem("pageIndex") > linkCount) {
     pageIndex = 0;
+    localStorage.setItem("pageIndex", JSON.stringify(pageIndex));
 } else {
 pageIndex = JSON.parse(localStorage.getItem("pageIndex"));
 }
 //console.log(linkkiLista);
 //indexItem();
 console.log(pageIndex);
-console.log(projektit);
+//console.log(projektit);
 //console.log(currentPage);
 //console.log(JSON.parse(localStorage.getItem("localProjektit")));
 //console.log(projektit1);
 //let projects1 = JSON.parse(localStorage.getItem("localProjects"));
 
 renderAll(projektit);
-createTodo();
+createTodo(projektit);
 
 
 /*const projectList = document.getElementsByClassName("li");

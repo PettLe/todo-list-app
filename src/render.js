@@ -1,4 +1,4 @@
-//import {/*localProjects*/ projektit, indexItem, pageIndex} from "./todos";
+import {/*localProjects*/ /*projektit,*/ indexItem, pageIndex} from "./todos";
 
 //let pageIndex = JSON.parse(localStorage.getItem("pageIndex"));
 
@@ -89,13 +89,6 @@ function nav(array) {
     nav.appendChild(navTitle);
 
     //LINKS
-    /*let linkList = ["Default", "Testi1", "Kokeilu5"];
-    if (localStorage.getItem("linkList1000") === null) {
-        linkList = ["Default", "Testi1", "Kokeilu5"];
-    } else {
-    linkList = JSON.parse(localStorage.getItem("linkList1000"));
-    } VÄLIAIKAINEN POIS*/
-
     let linkkiLista = [];
     if (localStorage.getItem("localLinkit") === null) {
         linkkiLista = ["Default"];
@@ -103,11 +96,10 @@ function nav(array) {
     linkkiLista = JSON.parse(localStorage.getItem("localLinkit"));
     }
 
-    //const linkit = JSON.parse(localStorage.getItem("linkList1000"));
     const links = document.createElement("ul");
     links.classList.add("links");
 
-    for (let g = 0; g < linkkiLista.length; g++) { //linkkiLista = linkList
+    for (let g = 0; g < linkkiLista.length; g++) {
         const link = document.createElement("li");
         link.dataset.index = g;
         link.classList.add("li");
@@ -117,7 +109,7 @@ function nav(array) {
             localStorage.setItem("pageIndex", JSON.stringify(currentPage));
             let filteredArray = [];
             for (let i = 0; i < array.length; i++) {
-                if (array[i].num == currentPage) {
+                if (array[i].num == JSON.parse(localStorage.getItem("pageIndex"))) {
                     filteredArray.push(array[i])}}
             renderLink(filteredArray);
         })
@@ -139,11 +131,10 @@ function nav(array) {
         link.textContent = userInput;
         navTitle.appendChild(links);
         links.appendChild(link);
-
-        linkkiLista.push(userInput);  //linkkiLista = linkList
-        //localStorage.setItem("linkList1000", JSON.stringify(linkList)); VÄLIAIKAINEN POIS
+        linkkiLista.push(userInput);
         localStorage.setItem("localLinkit", JSON.stringify(linkkiLista));
-
+        location.reload();
+        
 })
     navTitle.appendChild(links);
 
@@ -155,17 +146,22 @@ function nav(array) {
     content.insertBefore(nav, content.firstChild);
 }
 
+//RENDER TODO
 export function renderTodo(array) {
+//location.reload();
     const todoDiv = document.createElement("div");
     todoDiv.id = "todoDiv";
 
+    let fullArray = [...array];
     let filteredArray = [];
+    console.log(fullArray);
     for (let i = 0; i < array.length; i++) {
-        if (array[i].num == JSON.parse(localStorage.getItem("pageIndex"))) { //aikasemmin oli CurrentPage tms
+        if (array[i].num == JSON.parse(localStorage.getItem("pageIndex"))) {
             filteredArray.push(array[i])}}
 
         console.log(filteredArray);
-        console.log(JSON.parse(localStorage.getItem("pageIndex")))
+        console.log("variable index on " + pageIndex);
+        console.log(JSON.parse(localStorage.getItem("pageIndex")));
     for (let i = 0; i < filteredArray.length; i++) {
 
             const cardElement1 = document.createElement("div");
@@ -205,9 +201,10 @@ export function renderTodo(array) {
             trashBtn.id = "trashBtn";
             trashBtn.textContent = "delete";
                 trashBtn.addEventListener("click", function() {
-                    array.splice(todo.dataset.index, 1);
-                    localStorage.setItem("localProjektit", JSON.stringify(array));
-                        trashButton(array);
+                    fullArray.splice(todo.dataset.index, 1);
+                    console.log(fullArray);
+                    localStorage.setItem("localProjektit", JSON.stringify(fullArray)); // Syöttää filteredArrayn localStorageen ja siksi kaikki muut projektit häviää
+                        trashButton(fullArray);
             });
             
             cardElement1.appendChild(cardTitle);
@@ -240,7 +237,6 @@ export function renderTodo(array) {
             todo.appendChild(visibleCard);
             todoDiv.insertBefore(todo, todoDiv.firstChild);           
             content.appendChild(todoDiv);
-           //}
         }
     }
 
@@ -262,7 +258,7 @@ export function renderTodo(array) {
         content.appendChild(frontTextDiv);
     }
 
-    function renderLink(array) {
+    export function renderLink(array) {
         const content = document.getElementById("content");
         content.innerHTML = "";
          frontText();
