@@ -149,6 +149,14 @@ body {
   margin-bottom: 2vh;
 }
 
+#allText {
+  text-align: center;
+  padding: 1vh;
+}
+h2 {
+  margin-top: 1vh;
+}
+
 #frontText p {
   text-align: center;
 }

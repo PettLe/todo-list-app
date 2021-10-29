@@ -253,12 +253,19 @@ export function renderTodo(array) {
     }
 
     function frontText() {
+        const allText = document.createElement("div");
+        allText.id = "allText";
+        const h2Text = document.createElement("h2");
+        const linkit = JSON.parse(localStorage.getItem("localLinkit"));
+        h2Text.textContent = linkit[pageIndex];
         const frontTextDiv = document.createElement("div");
         frontTextDiv.id = "frontText";
         const frontText = document.createElement("p");
         frontText.innerHTML = "Welcome! <br> Here you can add task to-do on the list. <br> Click the button to show more information!";
         const content = document.getElementById("content");
-        frontTextDiv.appendChild(frontText);
+        allText.appendChild(frontText);
+        allText.appendChild(h2Text);
+        frontTextDiv.appendChild(allText);
         content.appendChild(frontTextDiv);
     }
 
