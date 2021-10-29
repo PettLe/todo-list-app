@@ -105,6 +105,7 @@ function nav(array) {
         link.classList.add("li");
         link.innerHTML = linkkiLista[g];
         link.addEventListener("click", function() {
+            location.reload();
             currentPage = g;
             localStorage.setItem("pageIndex", JSON.stringify(currentPage));
             let filteredArray = [];
@@ -152,7 +153,8 @@ export function renderTodo(array) {
     const todoDiv = document.createElement("div");
     todoDiv.id = "todoDiv";
 
-    let fullArray = [...array];
+    //let fullArray = [...array];
+    let fullArray = array.map((_arrayElement) => Object.assign({}, _arrayElement));
     let filteredArray = [];
     console.log(fullArray);
     for (let i = 0; i < array.length; i++) {
@@ -201,10 +203,12 @@ export function renderTodo(array) {
             trashBtn.id = "trashBtn";
             trashBtn.textContent = "delete";
                 trashBtn.addEventListener("click", function() {
+                    //console.log(JSON.parse(localStorage.getItem("localProjektit")));
                     fullArray.splice(todo.dataset.index, 1);
                     console.log(fullArray);
                     localStorage.setItem("localProjektit", JSON.stringify(fullArray)); // Syöttää filteredArrayn localStorageen ja siksi kaikki muut projektit häviää
-                        trashButton(fullArray);
+                        trashButton(fullArray)
+                        console.log(JSON.parse(localStorage.getItem("localProjektit")));
             });
             
             cardElement1.appendChild(cardTitle);

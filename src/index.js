@@ -54,10 +54,10 @@ console.log(pageIndex);
 //console.log(JSON.parse(localStorage.getItem("localProjektit")));
 //console.log(projektit1);
 //let projects1 = JSON.parse(localStorage.getItem("localProjects"));
-
+(function runAll() {
 renderAll(projektit);
 createTodo(projektit);
-
+})();
 
 /*const projectList = document.getElementsByClassName("li");
 for (let j = 0; j < projectList.length; j++) {

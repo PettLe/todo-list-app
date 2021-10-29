@@ -60,21 +60,25 @@ class Todo {
     }
 }
 
-    let form = document.querySelector('form');
-    let submitBtn = document.getElementById("submitBtn");
-    form.addEventListener('submit', function(event) {
-        console.log("Korppi1");
-        //location.reload();
-        addTodo(event);
-    });
+    //let form = document.querySelector('form');
+    let form = document.getElementById("todoForm");
+    form.addEventListener('submit', addTodo) //{
+       // event.preventDefault();
+       // document.getElementById("todoForm").submit();
+       // console.log("Korppi1");
+       // location.reload();
+       // addTodo(event);
+       // renderLink(array);
+    //});
 
     //SUBMIT
     function addTodo(event) {
+       // event.preventDefault();
     //indexItem();
     let title = document.getElementById("title").value;
     let description = document.getElementById("description").value;
     let dueDate = document.getElementById("dueDate").value;
-    let priority = document.getElementById("priority").value; //Oli currentPage
+    let priority = document.getElementById("priority").value;
     let num = pageIndex;
 
     let newTodo = new Todo(title, description, dueDate, priority, num);
@@ -85,8 +89,8 @@ class Todo {
     localStorage.setItem("localProjektit", JSON.stringify(array));
     //location.reload();
     form.reset();
-    event.preventDefault();
-    renderLink(array);
+    //event.preventDefault();
+    //renderLink(array);
     
 }
 };
