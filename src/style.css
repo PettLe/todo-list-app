@@ -43,6 +43,12 @@ body {
   color: #d6d9d2;
 }
 
+#linkDiv {
+  display: flex;
+  justify-content: space-between;
+  /*gap: 1.5vw;*/
+}
+
 #createNew {
   cursor: pointer;
 }
@@ -85,7 +91,13 @@ body {
   outline: inherit;
 }
 
+.material-icons-outlined {
+  font-family: "Material icons";
+}
+
 #trashBtn {
+  font-family: "Material icons";
+  font-size: 1.5rem;
   color: rgb(226, 49, 49);
   cursor: pointer;
 }
@@ -119,8 +131,17 @@ body {
 }
 
 .expandBtn {
-  padding: 1.5vh;
+  font-family: "Material icons";
+  font-size: 2rem;
+  border: 0;
+  padding: 0;
+  background-color: inherit;
+  color: rgb(33, 175, 28);
+  font-weight: 900;
   max-height: 5vh;
+}
+.expandBtn:hover {
+  cursor: pointer;
 }
 
 .cardElem {

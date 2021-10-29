@@ -100,8 +100,10 @@ function nav(array) {
     links.classList.add("links");
 
     for (let g = 0; g < linkkiLista.length; g++) {
+        const linkDiv = document.createElement("div");
+        linkDiv.id = "linkDiv";
+        linkDiv.dataset.index = g;
         const link = document.createElement("li");
-        link.dataset.index = g;
         link.classList.add("li");
         link.innerHTML = linkkiLista[g];
         link.addEventListener("click", function() {
@@ -114,7 +116,21 @@ function nav(array) {
                     filteredArray.push(array[i])}}
             renderLink(filteredArray);
         })
-        links.appendChild(link);
+
+            const trashBtn = document.createElement("p");
+            trashBtn.id = "trashBtn";
+            trashBtn.textContent = "close";
+              /*  trashBtn.addEventListener("click", function() {
+                    fullArray.splice(todo.dataset.index, 1);
+                    console.log(fullArray);
+                    localStorage.setItem("localProjektit", JSON.stringify(fullArray)); // Syöttää filteredArrayn localStorageen ja siksi kaikki muut projektit häviää
+                        trashButton(fullArray)
+                        console.log(JSON.parse(localStorage.getItem("localProjektit")));
+            });*/
+
+        linkDiv.appendChild(link);
+        linkDiv.appendChild(trashBtn);
+        links.appendChild(linkDiv);
     }
 
     navTitle.appendChild(links);
@@ -184,7 +200,7 @@ export function renderTodo(array) {
 
             const cardExpand = document.createElement("button");
             cardExpand.classList.add("expandBtn");
-            cardExpand.textContent = "Open";
+            cardExpand.textContent = "expand_more";
 
             for (let item in filteredArray[i]) {
                 cardTitle.textContent = (filteredArray[i].title);
