@@ -1,6 +1,4 @@
-import {/*localProjects*/ /*projektit,*/ indexItem, pageIndex} from "./todos";
-
-//let pageIndex = JSON.parse(localStorage.getItem("pageIndex"));
+import {pageIndex} from "./todos";
 
 function todoForm() {
     let content = document.getElementById("content");
@@ -52,20 +50,7 @@ function todoForm() {
     todoForm.appendChild(submitBtn);
     content.appendChild(todoForm);
 }
-/*
-    //TEMPORARY CLEAR BUTTON
-    function clearBtn() {
-    const content = document.getElementById("content");
-    let clearBtn = document.createElement("button");
-    clearBtn.id = "clearBtn";
-    clearBtn.textContent = "Clear";
-    clearBtn.addEventListener("click", function() {
-        localStorage.clear();
-        renderTodo();
-    });
-    content.appendChild(clearBtn);
-}
-*/
+
 function header() {
     const header = document.createElement("div");
     header.id = "header";
@@ -182,21 +167,15 @@ function nav(array) {
 
 //RENDER TODO
 export function renderTodo(array) {
-//location.reload();
     const todoDiv = document.createElement("div");
     todoDiv.id = "todoDiv";
 
-    //let fullArray = [...array];
     let fullArray = array.map((_arrayElement) => Object.assign({}, _arrayElement));
     let filteredArray = [];
-    console.log(fullArray);
     for (let i = 0; i < array.length; i++) {
         if (array[i].num == JSON.parse(localStorage.getItem("pageIndex"))) {
             filteredArray.push(array[i])}}
 
-        console.log(filteredArray);
-        console.log("variable index on " + pageIndex);
-        console.log(JSON.parse(localStorage.getItem("pageIndex")));
     for (let i = 0; i < filteredArray.length; i++) {
 
             const cardElement1 = document.createElement("div");
@@ -236,15 +215,11 @@ export function renderTodo(array) {
             trashBtn.id = "trashBtn";
             trashBtn.textContent = "delete";
                 trashBtn.addEventListener("click", function() {
-                    //console.log(this.parentElement.parentElement.childNodes[0].textContent);
-                    //console.log(JSON.parse(localStorage.getItem("localProjektit")));
                     for (let c = 0; c < fullArray.length; c++) {
                     if (this.parentElement.parentElement.childNodes[0].textContent == fullArray[c].title) {
                         fullArray.splice(c, 1);
-                    }
-                    }
-                    //fullArray.splice(todo.dataset.index, 1);
-                    //console.log(fullArray);
+                    }}
+
                     localStorage.setItem("localProjektit", JSON.stringify(fullArray));
                         trashButton(fullArray)
                         console.log(JSON.parse(localStorage.getItem("localProjektit")));
@@ -296,7 +271,6 @@ export function renderTodo(array) {
         allText.id = "allText";
         const h2Text = document.createElement("h2");
         const linkit = JSON.parse(localStorage.getItem("localLinkit"));
-        //console.log(linkit);
         if (linkit == null) {
             h2Text.textContent = "Default";
         } else {
