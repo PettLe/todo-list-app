@@ -25,8 +25,6 @@ class Todo {
 
     //SUBMIT
     function addTodo(event) {
-       // event.preventDefault();
-
     let title = document.getElementById("title").value;
     let description = document.getElementById("description").value;
     let dueDate = document.getElementById("dueDate").value;

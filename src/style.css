@@ -45,8 +45,8 @@ body {
 
 #linkDiv {
   display: flex;
+  max-width: 9vw;
   justify-content: space-between;
-  /*gap: 1.5vw;*/
 }
 
 #createNew {
@@ -74,10 +74,6 @@ body {
 #priority {
   border-radius: 25px;
 }
-
-/*#clearBtn {
-  max-width: 7vw;
-}*/
 
 #submitBtn {
   background: none;

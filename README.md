@@ -8,3 +8,8 @@ Even now it's the solution that makes the most sense to me. But for some reason 
 solution where I indexed the currently opened project, and tied that index in to the objects. Then when rendering the project, I filtered through that.
 Not a surprise that it raised a problem with deleting projects: now the indexes in the objects don't match the list of projects left. But it was surprisingly easy
 to fix. (Just looped through objects, the ones with higher index than the removed list index, I just lowered their index by one.)
+
+There is still some things I wish to fix in the future, but not now. This project was so exhausting I feel like it's time to forward.
+Examples: datePicker could be more elegant. (Though this is more my preference as an European). Inputting a long string without spaces (todo and project name)
+will mess with the UI.
+And the most annoying thing: page refreshes almost every turn an action is taken. But it was the only way to get this to work.
